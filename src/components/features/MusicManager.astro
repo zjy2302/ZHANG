@@ -131,43 +131,98 @@ const managerConfigStr = JSON.stringify({
     }
 
     // ── Meting fetch ─────────────────────────────────────────
+    var METING_TIMEOUT_MS = 8000;
+    var METING_CACHE_TTL_MS = 6 * 60 * 60 * 1000;
+
+    function getMetingUrl(baseApi, m) {
+        var fetchUrl = baseApi
+            .replace(':server', m.server)
+            .replace(':type', m.type)
+            .replace(':id', m.id)
+            .replace(':r', Math.random());
+        if (m.auth) {
+            fetchUrl += (fetchUrl.indexOf('?') === -1 ? '?' : '&') + 'auth=' + encodeURIComponent(m.auth);
+        }
+        return fetchUrl;
+    }
+
+    function fetchMetingJson(fetchUrl, controllers) {
+        var controller = new AbortController();
+        controllers.push(controller);
+        var timeout = setTimeout(function () { controller.abort(); }, METING_TIMEOUT_MS);
+
+        return fetch(fetchUrl, { signal: controller.signal })
+            .then(function (res) {
+                if (!res.ok) throw new Error('HTTP ' + res.status);
+                return res.json();
+            })
+            .finally(function () { clearTimeout(timeout); });
+    }
+
     async function fetchMetingData() {
         if (!config.meting) return;
         var m = config.meting;
-        var apis = [m.api].concat(m.fallbackApis || []);
+        var apis = [m.api].concat(m.fallbackApis || []).filter(Boolean);
+        var cacheKey = 'firefly-meting:' + m.server + ':' + m.type + ':' + m.id;
+        var stalePlaylist = null;
 
-        for (var i = 0; i < apis.length; i++) {
-            var baseApi = apis[i];
-            if (!baseApi) continue;
-            try {
-                var fetchUrl = baseApi
-                    .replace(':server', m.server)
-                    .replace(':type', m.type)
-                    .replace(':id', m.id)
-                    .replace(':r', Math.random());
-                if (m.auth) fetchUrl += '&auth=' + m.auth;
-
-                var res = await fetch(fetchUrl);
-                if (!res.ok) throw new Error('HTTP ' + res.status);
-                var data = await res.json();
-
-                if (Array.isArray(data) && data.length > 0) {
-                    state.playlist = data.map(function (item) {
-                        return {
-                            name: item.title || item.name || 'Unknown',
-                            artist: item.author || item.artist || 'Unknown',
-                            url: item.url,
-                            pic: item.pic || item.cover || '',
-                            lrc: item.lrc
-                        };
-                    });
+        try {
+            var cached = JSON.parse(localStorage.getItem(cacheKey) || 'null');
+            if (cached && Array.isArray(cached.playlist) && cached.playlist.length > 0) {
+                if (Date.now() - cached.time < METING_CACHE_TTL_MS) {
+                    state.playlist = cached.playlist;
                     return;
                 }
-            } catch (e) {
-                console.warn('Meting API failed for ' + baseApi, e);
+                stalePlaylist = cached.playlist;
             }
+        } catch (e) {
+            console.warn('Invalid Meting cache, ignoring it.', e);
         }
-        throw new Error('All Meting APIs failed');
+
+        var controllers = [];
+        try {
+            var data;
+            try {
+                // 并行请求，避免一个失效接口串行阻塞整个页面。
+                data = await Promise.any(apis.map(function (baseApi) {
+                    return fetchMetingJson(getMetingUrl(baseApi, m), controllers).then(function (result) {
+                        if (!Array.isArray(result) || result.length === 0) {
+                            throw new Error('Meting API returned no tracks');
+                        }
+                        return result;
+                    });
+                }));
+            } finally {
+                controllers.forEach(function (controller) { controller.abort(); });
+            }
+
+            state.playlist = data.map(function (item) {
+                return {
+                    name: item.title || item.name || 'Unknown',
+                    artist: item.author || item.artist || 'Unknown',
+                    url: item.url,
+                    pic: item.pic || item.cover || '',
+                    lrc: item.lrc
+                };
+            });
+
+            try {
+                localStorage.setItem(cacheKey, JSON.stringify({
+                    time: Date.now(),
+                    playlist: state.playlist
+                }));
+            } catch (e) {
+                console.warn('Unable to cache Meting playlist.', e);
+            }
+            return;
+        } catch (e) {
+            console.warn('All Meting APIs failed.', e);
+            if (stalePlaylist) {
+                state.playlist = stalePlaylist;
+                return;
+            }
+            throw new Error('All Meting APIs failed');
+        }
     }
 
     // ── Lyrics ───────────────────────────────────────────────
