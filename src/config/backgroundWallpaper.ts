@@ -73,17 +73,15 @@ export const backgroundWallpaper: BackgroundWallpaperConfig = {
 			// 是否启用主页横幅文字
 			enable: true,
 			// 主页横幅主标题
-			title: "兔兔の小窝",
+			title: "陪你度过漫长岁月",
 			// 主页横幅主标题字体大小
 			titleSize: "4.5rem",
 			// 主页横幅副标题
 			subtitle: [
-				"In Reddened Chrysalis, I Once Rest",
-				"From Shattered Sky, I Free Fall",
-				"Amidst Silenced Stars, I Deep Sleep",
-				"Upon Lighted Fyrefly, I Soon Gaze",
-				"From Undreamt Night, I Thence Shine",
-				"In Finalized Morrow, I Full Bloom",
+				"锦瑟无端五十弦，一弦一柱思华年",
+				"庄生晓梦迷蝴蝶，望帝春心托杜鹃",
+				"沧海月明珠有泪，蓝田日暖玉生烟",
+				"此情可待成追忆，只是当时已惘然",
 			],
 			// 主页横幅副标题字体大小
 			subtitleSize: "1.5rem",
