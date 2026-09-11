@@ -42,24 +42,24 @@ const pages = resolvePageToggles({
 
 export const siteConfig: SiteConfig = {
 	// 站点标题
-	title: "兔兔の小窝",
+	title: "阿拉斯加海湾",
 
 	// 站点副标题
-	subtitle: "你醒了，你刚刚好像做噩梦了",
+	subtitle: "此心光明，亦复何言",
 
 	// 站点 URL
 	site_url: "https://zjy1573.me",
 
 	// 站点描述
 	description:
-		"这是兔兔的个人博客……",
+		"这是小毅的个人博客……",
 
 	// 站点关键词
 	keywords: [
 		"Zjy",
-		"Fuwari",
+		"摄影",
 		"Astro",
-		"ACGN",
+		"随笔 ",
 		"博客",
 		"技术博客",
 		"静态博客",
