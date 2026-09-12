@@ -101,7 +101,7 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 	],
 
 	// 右侧边栏组件配置列表
-		rightComponents: [
+	rightComponents: [
 		{
 			// 组件类型：自定义跳转卡片
 			type: "advertisement",
@@ -111,22 +111,25 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 			showOnPostPage: false,
 			specificConfig: {
 				ad: {
-	image: {
-		src: "/assets/images/portfolio-entry.webp",
-		alt: "摄影作品集",
-		link: "https://zhang-junyi-site.pages.dev/",
-		external: true,
-	},
-	title: "拾光坐标",
-	content: "循着光影的坐标，去我的摄影集看看。",
-	link: {
-		text: "进入摄影集",
-		url: "https://zhang-junyi-site.pages.dev/",
-		external: true,
-	},
-	closable: false,
-	displayCount: -1,
-},
+					image: {
+						src: "/assets/images/portfolio-entry.webp",
+						alt: "摄影作品集",
+						link: "https://zhang-junyi-site.pages.dev/",
+						external: true,
+					},
+					title: "拾光坐标",
+					content: "循着光影的坐标，去我的摄影集看看。",
+					link: {
+						text: "进入摄影集",
+						url: "https://zhang-junyi-site.pages.dev/",
+						external: true,
+					},
+					padding: {
+						all: "0.75rem",
+					},
+					closable: false,
+					displayCount: -1,
+				},
 			},
 		},
 		{
@@ -304,34 +307,34 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 			},
 		},
 		{
-	type: "advertisement",
-	enable: true,
-	showTitle: true,
-	showOnPostPage: false,
-	specificConfig: {
-		ad: {
-			image: {
-	src: "/assets/images/portfolio-entry.webp",
-	alt: "摄影作品集",
-	link: "https://zhang-junyi-site.pages.dev/",
-	external: true,
-},
-			title: "拾光坐标",
-			content: "循着光影的坐标，去我的摄影集看看。",
-			link: {
-				text: "进入摄影集",
-				url: "https://zhang-junyi-site.pages.dev/",
-				external: true,
+			type: "advertisement",
+			enable: true,
+			showTitle: true,
+			showOnPostPage: false,
+			specificConfig: {
+				ad: {
+					image: {
+						src: "/assets/images/portfolio-entry.webp",
+						alt: "摄影作品集",
+						link: "https://zhang-junyi-site.pages.dev/",
+						external: true,
+					},
+					title: "拾光坐标",
+					content: "循着光影的坐标，去我的摄影集看看。",
+					link: {
+						text: "进入摄影集",
+						url: "https://zhang-junyi-site.pages.dev/",
+						external: true,
+					},
+					padding: {
+						all: "0.75rem",
+					},
+					closable: false,
+					displayCount: -1,
+				},
 			},
-			closable: false,
-			displayCount: -1,
 		},
-	},
-},
-{
-	// 组件类型：最新动态组件
-	type: "dynamic",
-
+		{
 			// 组件类型：最新动态组件
 			type: "dynamic",
 			// 是否启用该组件
