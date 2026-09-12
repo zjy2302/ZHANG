@@ -111,16 +111,22 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 			showOnPostPage: false,
 			specificConfig: {
 				ad: {
-					title: "拾光坐标",
-					content: "循着光影的坐标，去我的摄影集看看。",
-					link: {
-						text: "进入摄影集",
-						url: "https://zhang-junyi-site.pages.dev/",
-						external: true,
-					},
-					closable: false,
-					displayCount: -1,
-				},
+	image: {
+		src: "/assets/images/portfolio-entry.webp",
+		alt: "摄影作品集",
+		link: "https://zhang-junyi-site.pages.dev/",
+		external: true,
+	},
+	title: "拾光坐标",
+	content: "循着光影的坐标，去我的摄影集看看。",
+	link: {
+		text: "进入摄影集",
+		url: "https://zhang-junyi-site.pages.dev/",
+		external: true,
+	},
+	closable: false,
+	displayCount: -1,
+},
 			},
 		},
 		{
