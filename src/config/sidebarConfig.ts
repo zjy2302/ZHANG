@@ -310,8 +310,8 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 	link: "https://zhang-junyi-site.pages.dev/",
 	external: true,
 },
-			title: "取景框外",
-			content: "把快门之外的风景，收进一份持续生长的光影档案。",
+			title: "拾光坐标",
+			content: "循着光影的坐标，去我的摄影集看看。",
 			link: {
 				text: "进入摄影集",
 				url: "https://zhang-junyi-site.pages.dev/",
@@ -322,6 +322,9 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 		},
 	},
 },
+{
+	// 组件类型：最新动态组件
+	type: "dynamic",
 
 			// 组件类型：最新动态组件
 			type: "dynamic",
