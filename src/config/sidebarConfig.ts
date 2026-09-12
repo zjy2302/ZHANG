@@ -103,6 +103,42 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 	// 右侧边栏组件配置列表
 	rightComponents: [
 		{
+	// 组件类型：自定义跳转卡片
+	type: "advertisement",
+	// 启用组件
+	enable: true,
+	// 显示“取景框外”标题
+	showTitle: true,
+	// 放在右侧栏顶部
+	position: "top",
+	// 只在首页等非文章详情页显示
+	showOnPostPage: false,
+	// 组件专属配置
+	specificConfig: {
+		ad: {
+			image: {
+	src: "/assets/images/portfolio-entry.webp",
+	alt: "摄影作品集",
+	link: "https://zhang-junyi-site.pages.dev/",
+	external: true,
+},
+			// 板块标题
+			title: "取景框外",
+			// 板块介绍
+			content: "把快门之外的风景，收进一份持续生长的光影档案。",
+			// 跳转链接
+			link: {
+				text: "进入摄影集",
+				url: "https://zhang-junyi-site.pages.dev/",
+				external: true,
+			},
+			// 不允许关闭
+			closable: false,
+			// -1 表示始终显示
+			displayCount: -1,
+		},
+	},
+},
 			// 组件类型：最新动态组件
 			type: "dynamic",
 			// 是否启用该组件
@@ -281,6 +317,31 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 			},
 		},
 		{
+	type: "advertisement",
+	enable: true,
+	showTitle: true,
+	showOnPostPage: false,
+	specificConfig: {
+		ad: {
+			image: {
+	src: "/assets/images/portfolio-entry.webp",
+	alt: "摄影作品集",
+	link: "https://zhang-junyi-site.pages.dev/",
+	external: true,
+},
+			title: "取景框外",
+			content: "把快门之外的风景，收进一份持续生长的光影档案。",
+			link: {
+				text: "进入摄影集",
+				url: "https://zhang-junyi-site.pages.dev/",
+				external: true,
+			},
+			closable: false,
+			displayCount: -1,
+		},
+	},
+},
+
 			// 组件类型：最新动态组件
 			type: "dynamic",
 			// 是否启用该组件
