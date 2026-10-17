@@ -137,7 +137,15 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 		],
 	});
 
-	// 文档链接
+		// 后台入口
+	links.push({
+		name: "后台",
+		url: "https://app.pagescms.org/",
+		external: true,
+		icon: "material-symbols:settings",
+	});
+
+// 文档链接
 	// links.push({
 	// 	name: "文档",
 	// 	url: "https://docs-firefly.cuteleaf.cn",
