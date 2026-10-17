@@ -1,0 +1,250 @@
+media:
+  - name: gallery_images
+    label: 相册图片
+    input: public/gallery
+    output: /gallery
+    rename: random
+    extensions: [jpg, jpeg, png, webp, avif, gif]
+    categories: [image]
+  - name: post_images
+    label: 文章图片
+    input: public/assets/posts
+    output: /assets/posts
+    rename: random
+    extensions: [jpg, jpeg, png, webp, avif, gif, svg]
+    categories: [image]
+  - name: dynamic_images
+    label: 动态图片
+    input: public/assets/dynamic
+    output: /assets/dynamic
+    rename: random
+    extensions: [jpg, jpeg, png, webp, avif, gif, svg]
+    categories: [image]
+
+content:
+  - name: writing
+    label: 内容管理
+    type: group
+    items:
+      - name: dynamic
+        label: 新闻动态
+        type: collection
+        path: src/content/dynamic
+        format: yaml-frontmatter
+        filename: "{year}-{month}-{day}-{hour}{minute}{second}.md"
+        view:
+          primary: published
+          sort: published
+          order: desc
+        fields:
+          - name: published
+            label: 发布时间
+            type: date
+            required: true
+            options:
+              time: true
+              format: "yyyy-MM-dd HH:mm:ss"
+          - name: pinned
+            label: 置顶
+            type: boolean
+            default: false
+          - name: location
+            label: 地点
+            type: string
+          - name: body
+            label: 动态内容
+            type: rich-text
+            required: true
+            options:
+              format: markdown
+              media: dynamic_images
+              rename: random
+              switcher: true
+
+      - name: posts
+        label: 博客文章
+        type: collection
+        path: src/content/posts
+        format: yaml-frontmatter
+        filename:
+          template: "{primary}.md"
+          field: create
+        view:
+          primary: title
+          sort: published
+          order: desc
+        fields:
+          - name: title
+            label: 标题
+            type: string
+            required: true
+          - name: published
+            label: 发布日期
+            type: date
+            required: true
+            options:
+              format: yyyy-MM-dd
+          - name: updated
+            label: 更新日期
+            type: date
+            options:
+              format: yyyy-MM-dd
+          - name: slug
+            label: 自定义链接
+            type: string
+            description: 可留空，例如 rain-words
+          - name: description
+            label: 摘要
+            type: text
+            options:
+              maxlength: 500
+          - name: image
+            label: 封面图
+            type: image
+            options:
+              media: post_images
+              rename: random
+              categories: [image]
+          - name: tags
+            label: 标签
+            type: string
+            list: true
+          - name: category
+            label: 分类
+            type: string
+          - name: lang
+            label: 语言
+            type: string
+          - name: pinned
+            label: 置顶
+            type: boolean
+            default: false
+          - name: draft
+            label: 草稿
+            type: boolean
+            default: false
+          - name: author
+            label: 作者
+            type: string
+          - name: comment
+            label: 允许评论
+            type: boolean
+            default: true
+          - name: password
+            label: 文章密码
+            type: string
+          - name: passwordHint
+            label: 密码提示
+            type: string
+          - name: series
+            label: 系列
+            type: string
+          - name: seriesOrder
+            label: 系列序号
+            type: number
+          - name: body
+            label: 正文
+            type: rich-text
+            required: true
+            options:
+              format: markdown
+              media: post_images
+              rename: random
+              switcher: true
+
+  - name: media
+    label: 媒体与页面
+    type: group
+    items:
+      - name: gallery
+        label: 相册
+        type: file
+        path: src/data/gallery.json
+        format: json
+        fields:
+          - name: albums
+            label: 相册列表
+            type: object
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{name} ({id})"
+            fields:
+              - name: id
+                label: 相册 ID
+                type: string
+                required: true
+                pattern: "^[a-z0-9-]+$"
+                description: 只能使用小写字母、数字和短横线
+              - name: name
+                label: 相册名称
+                type: string
+                required: true
+              - name: description
+                label: 相册描述
+                type: text
+              - name: location
+                label: 拍摄地点
+                type: string
+              - name: date
+                label: 拍摄日期
+                type: date
+                options:
+                  format: yyyy-MM-dd
+              - name: tags
+                label: 标签
+                type: string
+                list: true
+              - name: cover
+                label: 封面图
+                type: image
+                options:
+                  media: gallery_images
+                  rename: random
+                  categories: [image]
+              - name: images
+                label: 相册图片
+                type: image
+                options:
+                  media: gallery_images
+                  multiple:
+                    max: 300
+                  unique: true
+                  rename: random
+                  categories: [image]
+              - name: password
+                label: 访问密码
+                type: string
+              - name: passwordHint
+                label: 密码提示
+                type: string
+          - name: columnWidth
+            label: 瀑布流最小列宽
+            type: number
+            default: 240
+            description: 数值越小列数越多，推荐 240
+
+      - name: music
+        label: 音乐歌单
+        type: file
+        path: src/data/music.json
+        format: json
+        fields:
+          - name: playlists
+            label: 网易云歌单
+            type: object
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{name}"
+            fields:
+              - name: name
+                label: 歌单名称
+                type: string
+                required: true
+              - name: id
+                label: 网易云歌单 ID
+                type: string
+                required: true
+                pattern: "^[0-9]+$"
+                description: 从网易云歌单分享链接的 id 参数中获取

@@ -51,6 +51,15 @@ export function scanAlbumPhotos(albumId: string): string[] {
 }
 
 /**
+ * 合并 CMS 配置的图片与相册目录中的图片
+ */
+export function getAlbumPhotos(album: GalleryAlbum): string[] {
+	const configured = (album.images || []).map(withBase);
+	const scanned = scanAlbumPhotos(album.id);
+	return [...new Set([...configured, ...scanned])];
+}
+
+/**
  * 获取相册封面图
  * 优先级：手动指定 > cover.* 文件 > 第一张图片
  */
