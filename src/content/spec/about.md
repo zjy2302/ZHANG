@@ -1,27 +1,40 @@
-# 关于我 / About Me
+# 关于我
 
-你好！我是 **夏叶** ，一个在数字世界中默默无闻的一片叶子。
+我是 **张军毅**，网名小毅。
 
-## 🛠️ 关于本站
+平时喜欢拍点照片、写点东西，也爱折腾自己的网站。不太擅长把话说得很漂亮，所以这里就直接一点。
 
-这个网站使用 **Astro** 框架构建，采用了 [Firefly](https://github.com/CuteLeaf/Firefly) 模板，Firefly 是基于 [Fuwari](https://github.com/saicaca/fuwari) 的二次开发。
+## 我在做的事
 
-**Firefly** 是一款基于 Astro 框架和 Fuwari 模板开发的清新美观且现代化个人博客主题模板，专为技术爱好者和内容创作者设计。该主题融合了现代 Web 技术栈，提供了丰富的功能模块和高度可定制的界面，让您能够轻松打造出专业且美观的个人博客网站。
+- **拍照**：把日常里遇到的光收集起来，放在 [拾光坐标](https://zhang-junyi-site.pages.dev/)
+- **写博客**：就是你现在看的这个站，用来放一些随笔和折腾记录
+- **折腾前端**：喜欢把一个页面从"能用"改到"看着舒服"
 
+## 关于这个站
 
-**🖥️在线预览： [Firefly - Demo site](https://firefly.cuteleaf.cn/)**
+站名叫「阿拉斯加海湾」，副标题是"此心光明，亦复何言"——喜欢这句话的干脆。
 
-**📝Firefly使用文档： [https://docs-firefly.cuteleaf.cn](https://docs-firefly.cuteleaf.cn/)**
+技术上它是 **Astro** 搭的，用了 [Firefly](https://github.com/CuteLeaf/Firefly) 主题（基于 [Fuwari](https://github.com/saicaca/fuwari) 二次开发），部署在 Cloudflare Pages 上，推代码就自动构建。
 
-**⭐Firefly开源地址：[https://github.com/CuteLeaf/Firefly](https://github.com/CuteLeaf/Firefly)** 
+现在站里的功能大致是这些：
 
-**⭐Fuwari开源地址：[https://github.com/saicaca/fuwari](https://github.com/saicaca/fuwari)**
+- 文章 / 动态 / 相册 / 项目展示
+- 友链和留言板（评论用 Giscus，挂在 GitHub Discussions 上）
+- 音乐页，接的是自己的网易云歌单
+- 全站搜索
+- 一个可视化后台，文章、相册、歌单、站点设置都能在网页里改，不用碰代码
 
-::github{repo="CuteLeaf/Firefly"}
+## 摄影
 
-::github{repo="saicaca/fuwari"}
+照片单独开了一个站，叫 [拾光坐标](https://zhang-junyi-site.pages.dev/)，那边只有照片，安静一些。竖幅横幅都做了适配，点开就能一张张看下去。
+
+## 找我
+
+- GitHub：[zjy2302](https://github.com/zjy2302)
+- 邮箱：15732733901@163.com
+- QQ：可以点头像旁边的图标
+- 也可以在[留言板](/guestbook/)留句话
 
 ---
 
-*感谢你的来访！希望在这里能找到对你有用的内容！*
-
+*谢谢你愿意看到这里。*
