@@ -1,52 +1,60 @@
 {
-	"title": "阿拉斯加海湾",
-	"subtitle": "此心光明，亦复何言",
-	"site_url": "https://zjy1573.me",
-	"description": "这是小毅的个人博客……",
-	"keywords": ["Zjy", "摄影", "Astro", "随笔", "博客", "技术博客", "静态博客"],
-	"themeColor": {
-		"hue": 165,
-		"defaultMode": "system"
-	},
-	"pageWidth": 100,
-	"siteStartDate": "2025-01-01",
-	"timezone": "Asia/Shanghai",
-	"categoryBar": true,
-	"categoryStyle": "rectangle",
-	"tagStyle": "pill",
-	"foldArticle": true,
-	"navbar": {
-		"title": "Firefly",
-		"widthFull": false,
-		"menuAlign": "center",
-		"followTheme": false,
-		"navbarMode": "dynamic"
-	},
-	"postListLayout": {
-		"defaultMode": "list",
-		"mobileDefaultMode": "grid",
-		"coverPosition": "right",
-		"descriptionLines": 2,
-		"showStatsIcons": true,
-		"tagsPosition": "bottom",
-		"tagsBottomStyle": "chip",
-		"grid": {
-			"masonry": false,
-			"columnWidth": 320,
-			"coverFullWidth": false
-		}
-	},
-	"pages": {
-		"friends": true,
-		"guestbook": true,
-		"dynamic": true,
-		"projects": true,
-		"gallery": true,
-		"booknav": true,
-		"bilibili": false,
-		"bangumi": false,
-		"vndb": false,
-		"mal": false,
-		"sponsor": true
-	}
+  "title": "阿拉斯加海湾",
+  "subtitle": "此心光明，亦复何言",
+  "site_url": "https://zjy1573.me",
+  "description": "小毅的个人博客，记录摄影、代码和生活里的一些光。",
+  "keywords": [
+    "Zjy",
+    "摄影",
+    "Astro",
+    "随笔",
+    "博客",
+    "技术博客",
+    "静态博客"
+  ],
+  "themeColor": {
+    "hue": 165,
+    "defaultMode": "system"
+  },
+  "pageWidth": 100,
+  "siteStartDate": "2025-01-01",
+  "timezone": "Asia/Shanghai",
+  "categoryBar": true,
+  "categoryStyle": "rectangle",
+  "tagStyle": "pill",
+  "foldArticle": true,
+  "navbar": {
+    "title": "Firefly",
+    "widthFull": false,
+    "menuAlign": "center",
+    "followTheme": false,
+    "navbarMode": "dynamic"
+  },
+  "postListLayout": {
+    "defaultMode": "list",
+    "mobileDefaultMode": "grid",
+    "coverPosition": "right",
+    "descriptionLines": 2,
+    "showStatsIcons": true,
+    "tagsPosition": "bottom",
+    "tagsBottomStyle": "chip",
+    "grid": {
+      "masonry": false,
+      "columnWidth": 320,
+      "coverFullWidth": false
+    }
+  },
+  "pages": {
+    "friends": true,
+    "guestbook": true,
+    "dynamic": true,
+    "projects": true,
+    "gallery": true,
+    "booknav": true,
+    "bilibili": false,
+    "bangumi": false,
+    "vndb": false,
+    "mal": false,
+    "sponsor": true
+  }
 }

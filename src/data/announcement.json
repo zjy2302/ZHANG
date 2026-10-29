@@ -1,12 +1,12 @@
 {
-	"title": "",
-	"content": "欢迎来到我的博客！这是一则示例公告。",
-	"type": "info",
-	"closable": true,
-	"link": {
-		"enable": true,
-		"text": "了解更多",
-		"url": "/about/",
-		"external": false
-	}
+  "title": "",
+  "content": "摄影作品站「拾光坐标」已经上线啦，照片都放在那边，欢迎去看看。",
+  "type": "info",
+  "closable": true,
+  "link": {
+    "enable": true,
+    "text": "去逛逛",
+    "url": "https://zhang-junyi-site.pages.dev/",
+    "external": true
+  }
 }
