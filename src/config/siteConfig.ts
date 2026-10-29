@@ -1,4 +1,5 @@
 import type { SiteConfig } from "@/types/siteConfig";
+import siteData from "../data/site.json";
 import { resolvePageToggles } from "../utils/page-toggle-utils";
 import { resolveSiteLang } from "../utils/site-config-utils";
 
@@ -40,7 +41,7 @@ const pages = resolvePageToggles({
 	sponsor: true,
 });
 
-export const siteConfig: SiteConfig = {
+const baseConfig: SiteConfig = {
 	// 站点标题
 	title: "阿拉斯加海湾",
 
@@ -51,19 +52,10 @@ export const siteConfig: SiteConfig = {
 	site_url: "https://zjy1573.me",
 
 	// 站点描述
-	description:
-		"这是小毅的个人博客……",
+	description: "这是小毅的个人博客……",
 
 	// 站点关键词
-	keywords: [
-		"Zjy",
-		"摄影",
-		"Astro",
-		"随笔 ",
-		"博客",
-		"技术博客",
-		"静态博客",
-	],
+	keywords: ["Zjy", "摄影", "Astro", "随笔 ", "博客", "技术博客", "静态博客"],
 
 	// 主题色
 	themeColor: {
@@ -362,4 +354,68 @@ export const siteConfig: SiteConfig = {
 
 	// 页面开关配置，在本配置文件顶部pages定义
 	pages,
+};
+
+// ============================================================================
+// 站点基础信息覆盖 - 由 Pages CMS 可视化编辑 src/data/site.json
+// Site settings override - edited visually in Pages CMS (src/data/site.json)
+// ============================================================================
+const settings = siteData as {
+	title?: string;
+	subtitle?: string;
+	site_url?: string;
+	description?: string;
+	keywords?: string[];
+	themeColor?: {
+		hue?: number;
+		defaultMode?: SiteConfig["themeColor"]["defaultMode"];
+	};
+	pageWidth?: number;
+	siteStartDate?: string;
+	timezone?: string;
+	categoryBar?: boolean;
+	categoryStyle?: SiteConfig["categoryStyle"];
+	tagStyle?: SiteConfig["tagStyle"];
+	foldArticle?: boolean;
+	navbar?: Partial<NonNullable<SiteConfig["navbar"]>>;
+	postListLayout?: Partial<SiteConfig["postListLayout"]> & {
+		grid?: Partial<SiteConfig["postListLayout"]["grid"]>;
+	};
+	pages?: Partial<SiteConfig["pages"]>;
+};
+
+export const siteConfig: SiteConfig = {
+	...baseConfig,
+	title: settings.title || baseConfig.title,
+	subtitle: settings.subtitle || baseConfig.subtitle,
+	site_url: settings.site_url || baseConfig.site_url,
+	description: settings.description ?? baseConfig.description,
+	keywords: settings.keywords ?? baseConfig.keywords,
+	themeColor: {
+		...baseConfig.themeColor,
+		...settings.themeColor,
+	},
+	pageWidth: settings.pageWidth ?? baseConfig.pageWidth,
+	siteStartDate: settings.siteStartDate ?? baseConfig.siteStartDate,
+	timezone: settings.timezone ?? baseConfig.timezone,
+	categoryBar: settings.categoryBar ?? baseConfig.categoryBar,
+	categoryStyle: settings.categoryStyle ?? baseConfig.categoryStyle,
+	tagStyle: settings.tagStyle ?? baseConfig.tagStyle,
+	foldArticle: settings.foldArticle ?? baseConfig.foldArticle,
+	navbar: {
+		...baseConfig.navbar,
+		...settings.navbar,
+	},
+	postListLayout: {
+		...baseConfig.postListLayout,
+		...settings.postListLayout,
+		grid: {
+			...baseConfig.postListLayout.grid,
+			...settings.postListLayout?.grid,
+		},
+	},
+	pages: {
+		...baseConfig.pages,
+		...settings.pages,
+	},
 };

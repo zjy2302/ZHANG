@@ -1,3 +1,4 @@
+import navigationData from "../data/navigation.json";
 import {
 	type NavBarConfig,
 	type NavBarLink,
@@ -15,8 +16,8 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 
 	// 主页
 	links.push(LinkPresets.Home);
-	
-		// 音乐页面
+
+	// 音乐页面
 	links.push({
 		name: "音乐",
 		url: "/music/",
@@ -108,39 +109,8 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 		name: "链接",
 		url: "#",
 		icon: "material-symbols:link",
-		// 子菜单
-		children: [
-			{
-				name: "GitHub",
-				url: "https://github.com/CuteLeaf/Firefly",
-				external: true,
-				icon: "fa7-brands:github",
-			},
-			{
-				name: "Gitee",
-				url: "https://gitee.com/CuteLeaf/Firefly",
-				external: true,
-				icon: "fa7-brands:gitee",
-			},
-			{
-				name: "QQ交流群",
-				url: "https://qm.qq.com/q/ZGsFa8qX2G",
-				external: true,
-				icon: "fa7-brands:qq",
-			},
-			{
-				name: "Firefly文档",
-				url: "https://docs-firefly.cuteleaf.cn",
-				external: true,
-				icon: "material-symbols:docs",
-			},
-			{
-				name: "后台",
-				url: "https://app.pagescms.org/",
-				external: true,
-				icon: "material-symbols:settings",
-			},
-		],
+		// 子菜单：由 Pages CMS 可视化编辑 src/data/navigation.json
+		children: [...(navigationData.customLinks ?? [])],
 	});
 
 	// 文档链接

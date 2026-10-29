@@ -1,0 +1,37 @@
+{
+	"avatar": "/assets/images/avatar.avif",
+	"name": "张军毅",
+	"bio": "Hello, I'm 小毅.",
+	"links": [
+		{
+			"name": "qq",
+			"icon": "fa7-brands:qq",
+			"url": "https://qm.qq.com/q/92b4LnOnSw",
+			"showName": false
+		},
+		{
+			"name": "GitHub",
+			"icon": "fa7-brands:github",
+			"url": "https://github.com/zjy2302",
+			"showName": false
+		},
+		{
+			"name": "Email",
+			"icon": "fa7-solid:envelope",
+			"url": "mailto:15732733901@163.com",
+			"showName": false
+		},
+		{
+			"name": "RSS",
+			"icon": "fa7-solid:rss",
+			"url": "/rss/",
+			"showName": false
+		},
+		{
+			"name": "Atom",
+			"icon": "fa7-solid:atom",
+			"url": "/atom/",
+			"showName": false
+		}
+	]
+}

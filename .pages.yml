@@ -20,6 +20,13 @@ media:
     rename: random
     extensions: [jpg, jpeg, png, webp, avif, gif, svg]
     categories: [image]
+  - name: avatar_images
+    label: 头像与站点图片
+    input: public/assets/images
+    output: /assets/images
+    rename: random
+    extensions: [jpg, jpeg, png, webp, avif, gif, svg]
+    categories: [image]
 
 content:
   - name: writing
@@ -152,6 +159,127 @@ content:
               rename: random
               switcher: true
 
+      - name: projects
+        label: 项目展示
+        type: collection
+        path: src/content/projects
+        format: yaml-frontmatter
+        filename:
+          template: "{primary}.md"
+          field: create
+        view:
+          primary: title
+          sort: published
+          order: desc
+        fields:
+          - name: title
+            label: 项目名称
+            type: string
+            required: true
+          - name: published
+            label: 开始日期
+            type: date
+            required: true
+            options:
+              format: yyyy-MM-dd
+          - name: draft
+            label: 草稿
+            type: boolean
+            default: false
+          - name: order
+            label: 排序
+            type: number
+            description: 数字越大越靠前
+          - name: description
+            label: 简介
+            type: text
+            options:
+              maxlength: 300
+          - name: image
+            label: 封面图
+            type: image
+            options:
+              media: post_images
+              rename: random
+              categories: [image]
+          - name: tags
+            label: 标签
+            type: string
+            list: true
+          - name: status
+            label: 状态
+            type: string
+          - name: lang
+            label: 语言
+            type: string
+          - name: link
+            label: 相关链接
+            type: object
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{label}"
+            fields:
+              - name: label
+                label: 链接名称
+                type: string
+                required: true
+              - name: icon
+                label: 图标
+                type: string
+              - name: value
+                label: 链接地址
+                type: string
+                required: true
+          - name: body
+            label: 项目说明
+            type: rich-text
+            options:
+              format: markdown
+              media: post_images
+              rename: random
+              switcher: true
+
+      - name: pages
+        label: 页面正文
+        type: group
+        items:
+          - name: about
+            label: 关于页
+            type: file
+            path: src/content/spec/about.md
+            format: yaml-frontmatter
+            fields:
+              - name: body
+                label: 正文
+                type: rich-text
+                options:
+                  format: markdown
+                  media: post_images
+                  rename: random
+                  switcher: true
+          - name: guestbook
+            label: 留言板
+            type: file
+            path: src/content/spec/guestbook.md
+            format: yaml-frontmatter
+            fields:
+              - name: title
+                label: 标题
+                type: string
+                required: true
+              - name: description
+                label: 描述
+                type: text
+              - name: body
+                label: 正文
+                type: rich-text
+                options:
+                  format: markdown
+                  media: post_images
+                  rename: random
+                  switcher: true
+
   - name: media
     label: 媒体与页面
     type: group
@@ -248,3 +376,532 @@ content:
                 required: true
                 pattern: "^[0-9]+$"
                 description: 从网易云歌单分享链接的 id 参数中获取
+
+  - name: settings
+    label: 站点设置
+    type: group
+    items:
+      - name: site
+        label: 站点基础信息
+        type: file
+        path: src/data/site.json
+        format: json
+        fields:
+          - name: title
+            label: 站点标题
+            type: string
+            required: true
+          - name: subtitle
+            label: 站点副标题
+            type: string
+          - name: site_url
+            label: 站点网址
+            type: string
+            description: 例如 https://zjy1573.me
+          - name: description
+            label: 站点描述
+            type: text
+            options:
+              maxlength: 300
+          - name: keywords
+            label: 站点关键词
+            type: string
+            list: true
+          - name: themeColor
+            label: 主题色
+            type: object
+            fields:
+              - name: hue
+                label: 色相
+                type: number
+                description: 0-360，例如红色 0、青色 200、蓝绿 165、粉色 345
+              - name: defaultMode
+                label: 默认模式
+                type: select
+                options:
+                  values:
+                    - light
+                    - dark
+                    - system
+          - name: pageWidth
+            label: 页面宽度
+            type: number
+            description: 单位 rem，推荐 60-110
+          - name: siteStartDate
+            label: 站点开始日期
+            type: string
+            pattern: "^\\d{4}-\\d{2}-\\d{2}$"
+            description: 格式 2025-01-01，用于统计运行天数
+          - name: timezone
+            label: 站点时区
+            type: string
+            description: 例如 Asia/Shanghai
+          - name: categoryBar
+            label: 显示分类导航栏
+            type: boolean
+          - name: categoryStyle
+            label: 分类按钮样式
+            type: select
+            options:
+              values:
+                - pill
+                - rectangle
+          - name: tagStyle
+            label: 标签样式
+            type: select
+            options:
+              values:
+                - pill
+                - pill-gray
+                - rectangle
+          - name: foldArticle
+            label: 归档页折叠旧年份
+            type: boolean
+          - name: navbar
+            label: 导航栏
+            type: object
+            fields:
+              - name: title
+                label: 导航栏标题
+                type: string
+              - name: widthFull
+                label: 导航栏全宽
+                type: boolean
+              - name: menuAlign
+                label: 菜单对齐
+                type: select
+                options:
+                  values:
+                    - left
+                    - center
+              - name: followTheme
+                label: 跟随主题色
+                type: boolean
+              - name: navbarMode
+                label: 导航栏模式
+                type: select
+                options:
+                  values:
+                    - static
+                    - fixed
+                    - dynamic
+          - name: postListLayout
+            label: 文章列表布局
+            type: object
+            fields:
+              - name: defaultMode
+                label: 默认布局
+                type: select
+                options:
+                  values:
+                    - list
+                    - grid
+              - name: mobileDefaultMode
+                label: 移动端布局
+                type: select
+                options:
+                  values:
+                    - list
+                    - grid
+              - name: coverPosition
+                label: 封面位置（列表模式）
+                type: select
+                options:
+                  values:
+                    - left
+                    - right
+              - name: descriptionLines
+                label: 摘要行数
+                type: number
+                description: 设为 0 则不截断
+              - name: showStatsIcons
+                label: 统计信息显示图标
+                type: boolean
+              - name: tagsPosition
+                label: 标签位置
+                type: select
+                options:
+                  values:
+                    - meta
+                    - bottom
+              - name: tagsBottomStyle
+                label: 底部标签样式
+                type: select
+                options:
+                  values:
+                    - chip
+                    - text
+              - name: grid
+                label: 网格布局
+                type: object
+                fields:
+                  - name: masonry
+                    label: 瀑布流布局
+                    type: boolean
+                  - name: columnWidth
+                    label: 卡片最小宽度
+                    type: number
+                  - name: coverFullWidth
+                    label: 封面撑满卡片
+                    type: boolean
+          - name: pages
+            label: 页面开关
+            type: object
+            fields:
+              - name: friends
+                label: 友链页
+                type: boolean
+              - name: guestbook
+                label: 留言板
+                type: boolean
+              - name: dynamic
+                label: 动态页
+                type: boolean
+              - name: projects
+                label: 项目展示页
+                type: boolean
+              - name: gallery
+                label: 相册页
+                type: boolean
+              - name: booknav
+                label: 书签导航
+                type: boolean
+              - name: bilibili
+                label: 哔哩哔哩
+                type: boolean
+              - name: bangumi
+                label: 番组计划
+                type: boolean
+              - name: vndb
+                label: VNDB
+                type: boolean
+              - name: mal
+                label: MyAnimeList
+                type: boolean
+              - name: sponsor
+                label: 打赏页
+                type: boolean
+
+      - name: profile
+        label: 个人资料
+        type: file
+        path: src/data/profile.json
+        format: json
+        fields:
+          - name: avatar
+            label: 头像
+            type: image
+            options:
+              media: avatar_images
+              rename: random
+              categories: [image]
+          - name: name
+            label: 名字
+            type: string
+            required: true
+          - name: bio
+            label: 个性签名
+            type: string
+          - name: links
+            label: 社交链接
+            type: object
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{name}"
+            fields:
+              - name: name
+                label: 名称
+                type: string
+                required: true
+              - name: url
+                label: 链接地址
+                type: string
+                required: true
+              - name: icon
+                label: 图标
+                type: string
+                description: 例如 fa7-brands:github，可在 https://icones.js.org/ 查找
+              - name: showName
+                label: 显示名称
+                type: boolean
+                default: false
+
+      - name: announcement
+        label: 公告栏
+        type: file
+        path: src/data/announcement.json
+        format: json
+        fields:
+          - name: title
+            label: 公告标题
+            type: string
+            description: 留空则使用默认标题
+          - name: content
+            label: 公告内容
+            type: text
+            required: true
+          - name: type
+            label: 公告类型
+            type: select
+            options:
+              values:
+                - info
+                - success
+                - warning
+                - error
+          - name: closable
+            label: 允许关闭
+            type: boolean
+          - name: link
+            label: 公告链接
+            type: object
+            fields:
+              - name: enable
+                label: 启用链接
+                type: boolean
+              - name: text
+                label: 链接文字
+                type: string
+              - name: url
+                label: 链接地址
+                type: string
+              - name: external
+                label: 外部链接
+                type: boolean
+
+      - name: comments
+        label: 评论设置
+        type: file
+        path: src/data/comments.json
+        format: json
+        fields:
+          - name: type
+            label: 评论系统
+            type: select
+            options:
+              values:
+                - none
+                - giscus
+                - twikoo
+                - waline
+                - artalk
+                - disqus
+          - name: giscus
+            label: Giscus（推荐）
+            type: object
+            fields:
+              - name: repo
+                label: 仓库
+                type: string
+                description: 例如 zjy2302/ZHANG
+              - name: repoId
+                label: 仓库 ID
+                type: string
+              - name: category
+                label: 讨论分类
+                type: string
+              - name: categoryId
+                label: 分类 ID
+                type: string
+              - name: mapping
+                label: 页面映射
+                type: select
+                options:
+                  values:
+                    - pathname
+                    - url
+                    - title
+                    - og:title
+                    - specific
+                    - number
+              - name: strict
+                label: 严格匹配
+                type: select
+                options:
+                  values:
+                    - "0"
+                    - "1"
+              - name: reactionsEnabled
+                label: 启用表情回应
+                type: select
+                options:
+                  values:
+                    - "0"
+                    - "1"
+              - name: emitMetadata
+                label: 发送元数据
+                type: select
+                options:
+                  values:
+                    - "0"
+                    - "1"
+              - name: inputPosition
+                label: 评论框位置
+                type: select
+                options:
+                  values:
+                    - top
+                    - bottom
+              - name: lang
+                label: 语言
+                type: string
+              - name: loading
+                label: 加载方式
+                type: select
+                options:
+                  values:
+                    - lazy
+                    - eager
+          - name: twikoo
+            label: Twikoo
+            type: object
+            fields:
+              - name: envId
+                label: 环境地址
+                type: string
+              - name: lang
+                label: 语言
+                type: string
+              - name: visitorCount
+                label: 统计访问量
+                type: boolean
+              - name: jsUrl
+                label: JS 地址
+                type: string
+              - name: cssUrl
+                label: 自定义 CSS
+                type: string
+          - name: waline
+            label: Waline
+            type: object
+            fields:
+              - name: serverURL
+                label: 服务端地址
+                type: string
+              - name: lang
+                label: 语言
+                type: string
+              - name: login
+                label: 登录模式
+                type: select
+                options:
+                  values:
+                    - enable
+                    - force
+                    - disable
+              - name: visitorCount
+                label: 统计访问量
+                type: boolean
+          - name: artalk
+            label: Artalk
+            type: object
+            fields:
+              - name: server
+                label: 服务端地址
+                type: string
+              - name: locale
+                label: 语言
+                type: string
+              - name: visitorCount
+                label: 统计访问量
+                type: boolean
+          - name: disqus
+            label: Disqus
+            type: object
+            fields:
+              - name: shortname
+                label: Shortname
+                type: string
+
+      - name: friends
+        label: 友链设置
+        type: file
+        path: src/data/friends.json
+        format: json
+        fields:
+          - name: page
+            label: 页面设置
+            type: object
+            fields:
+              - name: title
+                label: 页面标题
+                type: string
+              - name: description
+                label: 页面描述
+                type: text
+              - name: showCustomContent
+                label: 显示自定义内容
+                type: boolean
+              - name: showComment
+                label: 显示评论区
+                type: boolean
+              - name: randomizeSort
+                label: 随机排序
+                type: boolean
+          - name: links
+            label: 友链列表
+            type: object
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{title}"
+            fields:
+              - name: title
+                label: 站点名称
+                type: string
+                required: true
+              - name: imgurl
+                label: 头像地址
+                type: string
+                required: true
+              - name: desc
+                label: 站点描述
+                type: text
+              - name: siteurl
+                label: 站点地址
+                type: string
+                required: true
+              - name: tags
+                label: 标签
+                type: string
+                list: true
+              - name: weight
+                label: 权重
+                type: number
+                description: 数字越大越靠前
+              - name: enabled
+                label: 启用
+                type: boolean
+                default: true
+
+      - name: navigation
+        label: 导航链接
+        type: file
+        path: src/data/navigation.json
+        format: json
+        fields:
+          - name: customLinks
+            label: 链接菜单项
+            type: object
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{name}"
+            fields:
+              - name: name
+                label: 名称
+                type: string
+                required: true
+              - name: url
+                label: 链接地址
+                type: string
+                required: true
+              - name: external
+                label: 外部链接
+                type: boolean
+                default: true
+              - name: icon
+                label: 图标
+                type: string
+                description: 例如 material-symbols:settings
