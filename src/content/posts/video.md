@@ -10,7 +10,7 @@ tags:
   - Firefly
 category: 文章示例
 pinned: false
-draft: false
+draft: true
 comment: false
 series: Firefly 功能示例
 seriesOrder: 5
@@ -28,8 +28,6 @@ published: 2023-10-19
 ```
 
 ## YouTube
-
-
 
 ## Bilibili
 
