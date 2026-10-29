@@ -250,6 +250,9 @@ content:
         path: src/content/spec/about.md
         format: yaml-frontmatter
         fields:
+          - name: title
+            label: 页面标题
+            type: string
           - name: body
             label: 正文
             type: rich-text

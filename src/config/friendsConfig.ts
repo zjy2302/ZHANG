@@ -3,15 +3,23 @@ import type { FriendLink, FriendsPageConfig } from "../types/friendsConfig";
 
 // 可以在 src/content/spec/friends.md 中编写友链页面下方的自定义内容
 
-// 友链页面配置：由 Pages CMS 可视化编辑 src/data/friends.json
-const friendsPage = friendsData.page ?? ({} as Record<string, unknown>);
+type FriendsPage = {
+	title?: string;
+	description?: string;
+	showCustomContent?: boolean;
+	showComment?: boolean;
+	randomizeSort?: boolean;
+};
 
+const friendsPage = (friendsData.page ?? {}) as FriendsPage;
+
+// 友链页面配置：由 Pages CMS 可视化编辑 src/data/friends.json
 export const friendsPageConfig: FriendsPageConfig = {
-	title: (friendsPage.title as string) ?? "",
-	description: (friendsPage.description as string) ?? "",
-	showCustomContent: (friendsPage.showCustomContent as boolean) ?? true,
-	showComment: (friendsPage.showComment as boolean) ?? true,
-	randomizeSort: (friendsPage.randomizeSort as boolean) ?? false,
+	title: friendsPage.title ?? "",
+	description: friendsPage.description ?? "",
+	showCustomContent: friendsPage.showCustomContent ?? true,
+	showComment: friendsPage.showComment ?? true,
+	randomizeSort: friendsPage.randomizeSort ?? false,
 };
 
 // 友链列表：由 Pages CMS 可视化编辑 src/data/friends.json
