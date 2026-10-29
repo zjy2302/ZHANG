@@ -240,46 +240,45 @@ content:
               rename: random
               switcher: true
 
-      - name: pages
-        label: 页面正文
-        type: group
-        items:
-          - name: about
-            label: 关于页
-            type: file
-            path: src/content/spec/about.md
-            format: yaml-frontmatter
-            fields:
-              - name: body
-                label: 正文
-                type: rich-text
-                options:
-                  format: markdown
-                  media: post_images
-                  rename: random
-                  switcher: true
-          - name: guestbook
-            label: 留言板
-            type: file
-            path: src/content/spec/guestbook.md
-            format: yaml-frontmatter
-            fields:
-              - name: title
-                label: 标题
-                type: string
-                required: true
-              - name: description
-                label: 描述
-                type: text
-              - name: body
-                label: 正文
-                type: rich-text
-                options:
-                  format: markdown
-                  media: post_images
-                  rename: random
-                  switcher: true
-
+  - name: pages
+    label: 页面正文
+    type: group
+    items:
+      - name: about
+        label: 关于页
+        type: file
+        path: src/content/spec/about.md
+        format: yaml-frontmatter
+        fields:
+          - name: body
+            label: 正文
+            type: rich-text
+            options:
+              format: markdown
+              media: post_images
+              rename: random
+              switcher: true
+      - name: guestbook
+        label: 留言板
+        type: file
+        path: src/content/spec/guestbook.md
+        format: yaml-frontmatter
+        fields:
+          - name: title
+            label: 标题
+            type: string
+            required: true
+          - name: description
+            label: 描述
+            type: text
+          - name: body
+            label: 正文
+            type: rich-text
+            options:
+              format: markdown
+              media: post_images
+              rename: random
+              switcher: true
   - name: media
     label: 媒体与页面
     type: group
